@@ -1,0 +1,57 @@
+<configuration>
+
+    <appender name="SERVER-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>server.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="Server logger" level="info" additivity="false">
+        <appender-ref ref="SERVER-FILE"/>
+    </logger>
+    <root level="info">
+        <appender-ref ref="SERVER-FILE" />
+    </root>
+
+    <appender name="CLIENT-FILE" class="ch.qos.logback.core.FileAppender">
+        <file>client.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="Client logger" level="info" additivity="false">
+        <appender-ref ref="CLIENT-FILE"/>
+    </logger>
+    <root level="info">
+        <appender-ref ref="CLIENT-FILE" />
+    </root>
+
+    <appender name="USER-HISTORY" class="ch.qos.logback.core.FileAppender">
+        <file>history.log</file>
+        <append>true</append>
+        <immediateFlush>true</immediateFlush>
+        <encoder>
+            <pattern>%date{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="History logger" level="info" additivity="false">
+        <appender-ref ref="USER-HISTORY"/>
+    </logger>
+    <root level="info">
+        <appender-ref ref="CLIENT-FILE" />
+    </root>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+    <logger name="Server logger" level="info" additivity="false">
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+</configuration>
