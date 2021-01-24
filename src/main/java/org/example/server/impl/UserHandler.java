@@ -7,6 +7,8 @@ import org.slf4j.Logger;
 import java.util.HashSet;
 import java.util.Set;
 
+import static org.example.common.Codes.*;
+
 public class UserHandler implements IUserHandler {
 
     private final Logger logger;
@@ -19,11 +21,11 @@ public class UserHandler implements IUserHandler {
     @Override
     public synchronized void process(IChatUser sender, String message) {
         logger.info("Processing - " + sender.getName() + " - " + message);
-        if (message.startsWith(Codes.NAME_CODE.get())) {
+        if (message.startsWith(NAME_CODE.get())) {
             processNameCode(sender, message);
-        } else if (message.startsWith(Codes.CONTACTS_CODE.get())) {
+        } else if (message.startsWith(CONTACTS_CODE.get())) {
             sender.sendMessage(getUsersAsString());
-        } else if (message.startsWith(Codes.EXIT_CODE.get())) {
+        } else if (message.startsWith(EXIT_CODE.get())) {
              processExitCode(sender);
         } else {
             sender.sendMessage("You said: " + message);

@@ -2,7 +2,7 @@ package org.example.server.impl;
 
 
 import org.example.server.interfaces.IChatServer;
-import org.example.server.interfaces.ISettings;
+import org.example.common.ISettings;
 import org.example.server.interfaces.IUserHandler;
 import org.slf4j.Logger;
 

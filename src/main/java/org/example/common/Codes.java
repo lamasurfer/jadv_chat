@@ -1,4 +1,4 @@
-package org.example.server.impl;
+package org.example.common;
 
 public enum Codes {
 

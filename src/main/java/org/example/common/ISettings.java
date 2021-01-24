@@ -1,8 +1,6 @@
-package org.example.server.interfaces;
+package org.example.common;
 
 public interface ISettings {
-
-    void load(String file);
 
     int getPort();
 

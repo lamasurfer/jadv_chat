@@ -9,6 +9,8 @@ import java.net.Socket;
 import java.util.Objects;
 import java.util.UUID;
 
+import static org.example.common.Codes.EXIT_CODE;
+
 public class ChatUser implements IChatUser {
 
     private final String id = UUID.randomUUID().toString();
@@ -55,7 +57,7 @@ public class ChatUser implements IChatUser {
             logger.info("Read " + message);
         } catch (IOException e) {
             logger.error(this.name + " exception in readMessage() - " + e.getMessage());
-            userHandler.process(this, Codes.EXIT_CODE.get());
+            userHandler.process(this, EXIT_CODE.get());
         }
         return message;
     }

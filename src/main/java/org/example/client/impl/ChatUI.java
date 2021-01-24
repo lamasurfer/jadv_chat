@@ -10,6 +10,9 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.function.Consumer;
 
+import static org.example.common.Codes.EXIT_CODE;
+import static org.example.common.Codes.NAME_CODE;
+
 public class ChatUI implements IChatUI {
 
     private static final String START_MESSAGE = "Enter your nickname and press enter to start chatting or 0 to exit";
@@ -55,11 +58,11 @@ public class ChatUI implements IChatUI {
         readerExecutor.execute(() -> listen(messageConsumer));
         readerExecutor.shutdown();
 
-        chatClient.send(Codes.NAME_CODE.get() + " " + name);
+        chatClient.send(NAME_CODE.get() + " " + name);
 
         while (true) {
             String message = scanner.nextLine();
-            if (Codes.EXIT_CODE.get().equals(message)) {
+            if (EXIT_CODE.get().equals(message)) {
                 chatClient.send(message);
                 break;
             }

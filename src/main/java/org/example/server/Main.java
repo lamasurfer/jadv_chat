@@ -1,10 +1,10 @@
 package org.example.server;
 
 import org.example.server.impl.ChatServer;
-import org.example.server.impl.Settings;
+import org.example.common.Settings;
 import org.example.server.impl.UserHandler;
 import org.example.server.interfaces.IChatServer;
-import org.example.server.interfaces.ISettings;
+import org.example.common.ISettings;
 import org.example.server.interfaces.IUserHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

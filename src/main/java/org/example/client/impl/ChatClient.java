@@ -2,7 +2,7 @@ package org.example.client.impl;
 
 
 import org.example.client.interfaces.IChatClient;
-import org.example.client.interfaces.ISettings;
+import org.example.common.ISettings;
 import org.slf4j.Logger;
 
 import java.io.BufferedReader;
