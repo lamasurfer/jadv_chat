@@ -1,9 +1,9 @@
-package org.example.server.impl;
+package org.example.server;
 
 
-import org.example.server.interfaces.IChatServer;
 import org.example.common.ISettings;
-import org.example.server.interfaces.IUserHandler;
+import org.example.server.handlers.IUserHandler;
+import org.example.server.users.ChatUser;
 import org.slf4j.Logger;
 
 import java.io.IOException;
@@ -12,7 +12,7 @@ import java.net.Socket;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class ChatServer implements IChatServer {
+public class ChatServer {
 
     private final Logger logger;
     private final ISettings settings;
@@ -27,7 +27,6 @@ public class ChatServer implements IChatServer {
         this.logger = logger;
     }
 
-    @Override
     public void start() {
         final int PORT = settings.getPort();
         final int MAX_CONNECTIONS = settings.getConnections();
@@ -55,13 +54,11 @@ public class ChatServer implements IChatServer {
         }
     }
 
-    @Override
     public ServerSocket startServerSocket(int port) throws IOException {
         return new ServerSocket(port);
     }
 
     // останавливает сервер с этой стороны из консоли
-    @Override
     public void stop() {
         userHandler.stopAll();
         try {

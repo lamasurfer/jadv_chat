@@ -1,7 +1,6 @@
-package org.example.client.impl;
+package org.example.client;
 
 
-import org.example.client.interfaces.IChatClient;
 import org.example.common.ISettings;
 import org.slf4j.Logger;
 
@@ -11,7 +10,7 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.Socket;
 
-public class ChatClient implements IChatClient {
+public class ChatClient {
 
     private final Logger logger;
     private final ISettings settings;
@@ -25,7 +24,6 @@ public class ChatClient implements IChatClient {
         this.logger = logger;
     }
 
-    @Override
     public void start() {
         final String HOST = settings.getHost();
         final int PORT = settings.getPort();
@@ -43,23 +41,19 @@ public class ChatClient implements IChatClient {
         }
     }
 
-    @Override
     public Socket startSocket(String host, int port) throws IOException {
         return new Socket(host, port);
     }
 
-    @Override
     public boolean isConnected() {
         return socket != null && socket.isConnected();
     }
 
-    @Override
     public void send(String message) {
-            writer.println(message);
-            logger.info("Sent " + message);
+        writer.println(message);
+        logger.info("Sent " + message);
     }
 
-    @Override
     public String read() {
         String message = null;
         try {
@@ -73,7 +67,6 @@ public class ChatClient implements IChatClient {
         return message;
     }
 
-    @Override
     public void stop() {
         try {
             if (socket != null && writer != null && reader != null) {

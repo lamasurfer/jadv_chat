@@ -1,4 +1,4 @@
-package org.example.server.interfaces;
+package org.example.server.users;
 
 public interface IChatUser extends Runnable {
 

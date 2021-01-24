@@ -1,4 +1,6 @@
-package org.example.server.interfaces;
+package org.example.server.handlers;
+
+import org.example.server.users.IChatUser;
 
 public interface IUserHandler {
 

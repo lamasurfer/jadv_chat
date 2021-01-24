@@ -1,7 +1,6 @@
-package org.example.server.impl;
+package org.example.server.users;
 
-import org.example.server.interfaces.IChatUser;
-import org.example.server.interfaces.IUserHandler;
+import org.example.server.handlers.IUserHandler;
 import org.slf4j.Logger;
 
 import java.io.*;

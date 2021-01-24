@@ -1,8 +1,6 @@
-package org.example.client.impl;
+package org.example.client;
 
 
-import org.example.client.interfaces.IChatClient;
-import org.example.client.interfaces.IChatUI;
 import org.slf4j.Logger;
 
 import java.util.Scanner;
@@ -13,7 +11,7 @@ import java.util.function.Consumer;
 import static org.example.common.Codes.EXIT_CODE;
 import static org.example.common.Codes.NAME_CODE;
 
-public class ChatUI implements IChatUI {
+public class ChatUI {
 
     private static final String START_MESSAGE = "Enter your nickname and press enter to start chatting or 0 to exit";
     private static final String COMMANDS =
@@ -22,17 +20,16 @@ public class ChatUI implements IChatUI {
                     "\n- type /exit to leave chat" +
                     "\n- or type your message";
 
-    private final IChatClient chatClient;
+    private final ChatClient chatClient;
     private final Scanner scanner;
     private final Logger logger;
 
-    public ChatUI(IChatClient chatClient, Scanner scanner, Logger logger) {
+    public ChatUI(ChatClient chatClient, Scanner scanner, Logger logger) {
         this.chatClient = chatClient;
         this.scanner = scanner;
         this.logger = logger;
     }
 
-    @Override
     public void startUserInteraction() {
 
         String name;

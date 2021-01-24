@@ -1,11 +1,9 @@
 package org.example.server;
 
-import org.example.server.impl.ChatServer;
-import org.example.common.Settings;
-import org.example.server.impl.UserHandler;
-import org.example.server.interfaces.IChatServer;
 import org.example.common.ISettings;
-import org.example.server.interfaces.IUserHandler;
+import org.example.common.Settings;
+import org.example.server.handlers.IUserHandler;
+import org.example.server.handlers.UserHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +19,7 @@ public class Main {
         final Logger logger = LoggerFactory.getLogger("Server logger");
 
         final IUserHandler userHandler = new UserHandler(logger);
-        final IChatServer chatServer = new ChatServer(userHandler, settings, logger);
+        final ChatServer chatServer = new ChatServer(userHandler, settings, logger);
 
         final Scanner scanner = new Scanner(System.in);
         final ExecutorService executor = Executors.newSingleThreadExecutor();
@@ -37,7 +35,7 @@ public class Main {
                 break;
             }
 
-            if ("0".equals(command))  {
+            if ("0".equals(command)) {
                 return;
             }
         }
