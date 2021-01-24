@@ -3,6 +3,7 @@ package org.example.client;
 
 import org.example.common.ISettings;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -18,6 +19,11 @@ public class ChatClient {
     private Socket socket;
     private PrintWriter writer;
     private BufferedReader reader;
+
+    public ChatClient(ISettings settings) {
+        this.settings = settings;
+        this.logger = LoggerFactory.getLogger("client logger");
+    }
 
     public ChatClient(ISettings settings, Logger logger) {
         this.settings = settings;

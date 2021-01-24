@@ -1,7 +1,6 @@
 package org.example.server.handlers;
 
 import org.example.server.users.IChatUser;
-import org.slf4j.Logger;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -10,16 +9,10 @@ import static org.example.common.Codes.*;
 
 public class UserHandler implements IUserHandler {
 
-    private final Logger logger;
     private final Set<IChatUser> users = new HashSet<>();
-
-    public UserHandler(Logger logger) {
-        this.logger = logger;
-    }
 
     @Override
     public synchronized void process(IChatUser sender, String message) {
-        logger.info("Processing - " + sender.getName() + " - " + message);
         if (message.startsWith(NAME_CODE.get())) {
             processNameCode(sender, message);
         } else if (message.startsWith(CONTACTS_CODE.get())) {
@@ -30,7 +23,6 @@ public class UserHandler implements IUserHandler {
             sender.sendMessage("You said: " + message);
             sendOther(sender, sender.getName() + " said: " + message);
         }
-        logger.info("Processed - " + sender.getName() + " - " + message);
     }
 
     void processNameCode(IChatUser sender, String message) {

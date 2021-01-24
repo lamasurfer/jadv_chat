@@ -2,10 +2,7 @@ package org.example.server;
 
 import org.example.common.ISettings;
 import org.example.common.Settings;
-import org.example.server.handlers.IUserHandler;
 import org.example.server.handlers.UserHandler;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -16,10 +13,8 @@ public class Main {
     public static void main(String[] args) {
 
         final ISettings settings = new Settings("src/main/resources/settings.txt");
-        final Logger logger = LoggerFactory.getLogger("Server logger");
 
-        final IUserHandler userHandler = new UserHandler(logger);
-        final ChatServer chatServer = new ChatServer(userHandler, settings, logger);
+        final ChatServer chatServer = new ChatServer(new UserHandler(), settings);
 
         final Scanner scanner = new Scanner(System.in);
         final ExecutorService executor = Executors.newSingleThreadExecutor();

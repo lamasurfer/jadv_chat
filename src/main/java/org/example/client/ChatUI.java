@@ -2,6 +2,7 @@ package org.example.client;
 
 
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.Scanner;
 import java.util.concurrent.ExecutorService;
@@ -23,6 +24,12 @@ public class ChatUI {
     private final ChatClient chatClient;
     private final Scanner scanner;
     private final Logger logger;
+
+    public ChatUI(ChatClient chatClient, Scanner scanner) {
+        this.chatClient = chatClient;
+        this.scanner = scanner;
+        this.logger = LoggerFactory.getLogger("history logger");;
+    }
 
     public ChatUI(ChatClient chatClient, Scanner scanner, Logger logger) {
         this.chatClient = chatClient;

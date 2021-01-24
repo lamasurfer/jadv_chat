@@ -5,6 +5,7 @@ import org.example.common.ISettings;
 import org.example.server.handlers.IUserHandler;
 import org.example.server.users.ChatUser;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -20,6 +21,12 @@ public class ChatServer {
 
     private ServerSocket serverSocket;
     private ExecutorService service;
+
+    public ChatServer(IUserHandler userHandler, ISettings settings) {
+        this.userHandler = userHandler;
+        this.settings = settings;
+        this.logger = LoggerFactory.getLogger("server logger");;
+    }
 
     public ChatServer(IUserHandler userHandler, ISettings settings, Logger logger) {
         this.userHandler = userHandler;
