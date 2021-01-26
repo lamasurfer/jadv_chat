@@ -4,6 +4,7 @@ public enum Codes {
 
     NAME_CODE("/name"),
     CONTACTS_CODE("/cont"),
+    HELP_CODE("/help"),
     EXIT_CODE("/exit");
 
     private final String code;

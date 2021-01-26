@@ -12,10 +12,7 @@ public class Main {
         final ISettings settings = new Settings("src/main/resources/settings.txt");
         final ChatClient chatClient = new ChatClient(settings);
 
-        final Scanner scanner = new Scanner(System.in);
-
-        final ChatUI chatUi = new ChatUI(chatClient, scanner);
-        chatUi.startUserInteraction();
-
+        final ChatUI chatUI = new ChatUI(chatClient, new Scanner(System.in));
+        chatUI.startChatting();
     }
 }

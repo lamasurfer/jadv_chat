@@ -25,7 +25,7 @@ public class ChatServer {
     public ChatServer(IUserHandler userHandler, ISettings settings) {
         this.userHandler = userHandler;
         this.settings = settings;
-        this.logger = LoggerFactory.getLogger("server logger");;
+        this.logger = LoggerFactory.getLogger("server logger");
     }
 
     public ChatServer(IUserHandler userHandler, ISettings settings, Logger logger) {
@@ -34,22 +34,17 @@ public class ChatServer {
         this.logger = logger;
     }
 
-    public void start() {
+    public void start() throws IOException {
         final int PORT = settings.getPort();
         final int MAX_CONNECTIONS = settings.getConnections();
 
+        serverSocket = createServerSocket(PORT);
+        logger.info("Server started");
+
+        service = createExecutorService(MAX_CONNECTIONS);
+        logger.info("Executor started");
+
         try {
-            serverSocket = startServerSocket(PORT);
-            if (serverSocket == null) {
-                logger.error("Error starting ServerSocket!");
-                return;
-            }
-
-            logger.info("Server started");
-
-            service = Executors.newFixedThreadPool(MAX_CONNECTIONS);
-            logger.info("Executor started");
-
             while (true) {
                 Socket clientSocket = serverSocket.accept();
                 logger.info("Connection accepted");
@@ -57,22 +52,27 @@ public class ChatServer {
             }
 
         } catch (IOException e) {
-            logger.error(this.getClass().getSimpleName() + " exception in start() - " + e.getMessage());
+            logger.warn("ChatServer exception in start() - " + e.getMessage());
         }
     }
 
-    public ServerSocket startServerSocket(int port) throws IOException {
+    public ServerSocket createServerSocket(int port) throws IOException {
         return new ServerSocket(port);
     }
 
-    // останавливает сервер с этой стороны из консоли
+    public ExecutorService createExecutorService(int connections) {
+        return Executors.newFixedThreadPool(connections);
+    }
+
     public void stop() {
-        userHandler.stopAll();
         try {
-            service.shutdown();
-            serverSocket.close();
+            if (userHandler != null && service != null && serverSocket != null) {
+                userHandler.stopAll();
+                service.shutdown();
+                serverSocket.close();
+            }
         } catch (IOException e) {
-            logger.error(this.getClass().getSimpleName() + " exception in stop() - " + e.getMessage());
+            logger.warn("ChatServer exception in stop() - " + e.getMessage());
         }
         logger.info("Server stopped");
     }

@@ -30,44 +30,33 @@ public class ChatClient {
         this.logger = logger;
     }
 
-    public void start() {
+    public void start() throws IOException {
         final String HOST = settings.getHost();
         final int PORT = settings.getPort();
 
-        try {
-            socket = startSocket(HOST, PORT);
-
-            logger.info("Connected to server");
-
-            writer = new PrintWriter(socket.getOutputStream(), true);
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-
-        } catch (IOException e) {
-            logger.error(this.getClass().getSimpleName() + " exception in start() - " + e.getMessage());
-        }
+        socket = createSocket(HOST, PORT);
+        writer = new PrintWriter(socket.getOutputStream(), true);
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        logger.info("Connected to server");
     }
 
-    public Socket startSocket(String host, int port) throws IOException {
+    public Socket createSocket(String host, int port) throws IOException {
         return new Socket(host, port);
     }
 
-    public boolean isConnected() {
-        return socket != null && socket.isConnected();
-    }
-
-    public void send(String message) {
+    public void sendMessage(String message) {
         writer.println(message);
         logger.info("Sent " + message);
     }
 
-    public String read() {
+    public String readMessage() {
         String message = null;
         try {
             message = reader.readLine();
             logger.info("Read " + message);
         } catch (IOException e) {
-            logger.error(this.getClass().getSimpleName() + " exception in read() - " + e.getMessage());
-            System.out.println("No connection");
+            logger.warn("ChatClient exception in read() - " + e.getMessage());
+            System.out.println("Disconnected");
             stop();
         }
         return message;
@@ -81,7 +70,7 @@ public class ChatClient {
                 socket.close();
             }
         } catch (IOException e) {
-            logger.error(this.getClass().getSimpleName() + " exception in stop() - " + e.getMessage());
+            logger.warn("ChatClient exception in stop() - " + e.getMessage());
         }
         logger.info("Client stopped");
     }

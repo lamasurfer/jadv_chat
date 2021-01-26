@@ -1,6 +1,10 @@
 package org.example.server.users;
 
+import java.io.IOException;
+
 public interface IChatUser extends Runnable {
+
+    void start() throws IOException;
 
     void sendMessage(String message);
 

@@ -8,7 +8,7 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
     </appender>
-    <logger name="Server logger" level="info" additivity="false">
+    <logger name="server logger" level="info" additivity="false">
         <appender-ref ref="SERVER-FILE"/>
     </logger>
     <root level="info">
@@ -23,7 +23,7 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
     </appender>
-    <logger name="Client logger" level="info" additivity="false">
+    <logger name="client logger" level="info" additivity="false">
         <appender-ref ref="CLIENT-FILE"/>
     </logger>
     <root level="info">
@@ -38,7 +38,7 @@
             <pattern>%date{yyyy-MM-dd HH:mm:ss} - %msg%n</pattern>
         </encoder>
     </appender>
-    <logger name="History logger" level="info" additivity="false">
+    <logger name="history logger" level="info" additivity="false">
         <appender-ref ref="USER-HISTORY"/>
     </logger>
     <root level="info">
@@ -50,7 +50,7 @@
             <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{35} - %msg%n</pattern>
         </encoder>
     </appender>
-    <logger name="Server logger" level="info" additivity="false">
+    <logger name="server logger" level="info" additivity="false">
         <appender-ref ref="STDOUT"/>
     </logger>
 

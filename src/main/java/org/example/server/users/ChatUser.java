@@ -31,21 +31,30 @@ public class ChatUser implements IChatUser {
     @Override
     public void run() {
         try {
-            reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            writer = new PrintWriter(new BufferedOutputStream(socket.getOutputStream()), true);
+            start();
             String message;
             while ((message = readMessage()) != null) {
                 userHandler.process(this, message);
             }
+            userHandler.process(this, EXIT_CODE.get());
         } catch (IOException e) {
-            logger.error(this.name + " exception in run() - " + e.getMessage());
+            logger.warn("ChatUser exception in run() - " + e.getMessage());
         }
     }
 
     @Override
+    public void start() throws IOException {
+        if (socket == null || socket.isClosed() || !socket.isConnected()) {
+            throw new IllegalStateException("socket is not ready!");
+        }
+        reader = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        writer = new PrintWriter(new BufferedOutputStream(socket.getOutputStream()), true);
+    }
+
+    @Override
     public void sendMessage(String message) {
-            writer.println(message);
-            logger.info("Sent " + message);
+        writer.println(message);
+        logger.info("Sent " + message);
     }
 
     @Override
@@ -55,8 +64,7 @@ public class ChatUser implements IChatUser {
             message = reader.readLine();
             logger.info("Read " + message);
         } catch (IOException e) {
-            logger.error(this.name + " exception in readMessage() - " + e.getMessage());
-            userHandler.process(this, EXIT_CODE.get());
+            logger.warn("ChatUser exception in readMessage() - " + e.getMessage());
         }
         return message;
     }
@@ -70,7 +78,7 @@ public class ChatUser implements IChatUser {
                 reader.close();
             }
         } catch (IOException e) {
-            logger.error(this.name + " " + e.getMessage());
+            logger.warn(this.name + " " + e.getMessage());
         }
     }
 
