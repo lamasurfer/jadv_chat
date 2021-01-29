@@ -113,7 +113,7 @@ class ChatClientTest {
             when(settings.getHost()).thenReturn(host);
             when(settings.getPort()).thenReturn(localPort);
 
-            final ChatClient client = spy(new ChatClient(settings));
+            final ChatClient client = spy(new ChatClient(settings, logger));
 
             final Socket socket = new Socket(host, localPort);
             doReturn(socket).when(client).createSocket(host, localPort);

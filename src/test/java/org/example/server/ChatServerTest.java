@@ -103,7 +103,6 @@ class ChatServerTest {
             fail("Test failed, check server");
         }
         spyServer.stop();
-        serverThread.interrupt();
     }
 
     @Test

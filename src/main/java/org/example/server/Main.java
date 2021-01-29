@@ -32,7 +32,6 @@ public class Main {
 
             if ("end".equals(command)) {
                 chatServer.stop();
-                serverThread.interrupt();
                 break;
             }
         }
