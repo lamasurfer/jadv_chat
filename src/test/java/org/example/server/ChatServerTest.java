@@ -79,7 +79,6 @@ class ChatServerTest {
         final ChatServer spyServer = spy(new ChatServer(userHandler, settings, logger));
         final ExecutorService service = mock(ExecutorService.class);
         doReturn(service).when(spyServer).createExecutorService(anyInt());
-        doNothing().when(service).execute(any(Runnable.class));
 
         Thread serverThread = new Thread(() -> {
             try {
